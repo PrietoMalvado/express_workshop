@@ -1,0 +1,22 @@
+{
+  "name": "express-workshop",
+  "version": "1.0.0",
+  "description": "an API REST using express.js",
+  "keywords": [
+    "api",
+    "rest",
+    "express",
+    "node",
+    "js"
+  ],
+  "license": "ISC",
+  "author": "Sanchez Martinez Jesus",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
