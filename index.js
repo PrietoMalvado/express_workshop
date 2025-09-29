@@ -1,42 +1,21 @@
 const express = require('express');//importamos express
 const app = express();//creamos una instancia de express
-const { pokemon } = require('./pokedex.json');//importamos el archivo json de pokemones
+const morgan = require('morgan');//importamos morgan para ver las peticiones en consola
+const pokemon = require('./routes/pokemon');//importamos las rutas de pokemon
 
 //:::::::::::::::::::::MIDDLEWARES:::::::::::::::::::::
 
+app.use(morgan('dev'));//usamos morgan en modo desarrollo
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//:::::::::::::::::::::METODO GET:::::::::::::::::::::
+//:::::::::::::::::::::Inicio del servidor:::::::::::::::::::::
 
 app.get('/', (req, res, next) => {
    return res.status(200).send('bienvenido al pokedex');// mensaje de envio del pokemon.json
 });
 
-app.get('/pokemon', (req, res, next) => {
-  return res.status(200).send(pokemon);// envio del archivo json (GETALL POKEMON)
-});
-
-app.get('/pokemon/:id([0-9]{1,3})', (req, res, next) => {
-  const id = req.params.id - 1;//convertir en un entero para que no sea texto parseInt
-  (id >= 0 && id <= 150) ? res.status(200).send(pokemon[req.params.id - 1]) : res.status(404).send("El pokemon no encontrado");// mensaje de error si el pokemon no se encuentra
-});
-
-app.get('/pokemon/:name([A-Za-z]+)', (req, res, next) => { //buscamos el pokemon por nombre
-  const name = req.params.name;
-  const pk = pokemon.filter((p) => { //funcion filter para filtrar el nombre del pokemon
-      return (p.name.toUpperCase() === name.toUpperCase()) && p; // ignorar mayusculas y minusculas
-  });
-  (pk.length > 0) ? res.status(200).send(pk) : res.status(404).send("Pokemon no encontrado");// mensaje de error si el pokemon no se encuentra
-});
-
-//:::::::::::::::::::::METODO POST:::::::::::::::::::::
-
-app.post('/pokemon', (req, res, next) => {
-   return res.status(200).send(req.body);// mensaje de envio del pokemon post
-});
-
-//:::::::::::::::::::::Inicio del servidor:::::::::::::::::::::
+app.use('/pokemon', pokemon);//definimos la ruta /pokemon para las rutas de pokemon
 
 app.listen(process.env.PORT || 3000, () => { // Iniciamos el servidor en el puerto 3000
   console.log('Server is running on port 3000');
