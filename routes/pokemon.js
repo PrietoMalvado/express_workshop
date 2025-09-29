@@ -18,7 +18,6 @@ pokemon.get('/', async (req, res, next) => {
 pokemon.get('/:id([0-9]{1,3})', async (req, res, next) => {
   const id = parseInt(req.params.id);//convertir entero
   const pkm = await db.query('SELECT * FROM pokemon WHERE pok_id = ?', [id]); //consulta a la base de datos
-  
   (id >= 1 && id <= 150 && pkm.length > 0) ? res.status(200).json(pkm[0]) : res.status(404).send("El pokemon no encontrado");// mensaje de error si el pokemon no se encuentra
 });
 pokemon.get('/:name([A-Za-z]+)', async (req, res, next) => { //buscamos el pokemon por nombre
