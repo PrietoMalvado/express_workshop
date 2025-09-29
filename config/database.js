@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const ulti = require('util'); //peticiones asincronas
+const util = require('util'); //peticiones asincronas
 
 // Configuración de la conexión a la base de datos
 
@@ -11,5 +11,5 @@ const pool = mysql.createPool({
     database: 'pokemon'
 });
 
-pool.query = ulti.promisify(pool.query); //promisify para hacer las peticiones asincronas
+pool.query = util.promisify(pool.query); //promisify para hacer las peticiones asincronas
 module.exports = pool;
