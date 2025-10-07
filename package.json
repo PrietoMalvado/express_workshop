@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/PrietoMalvado/express_workshop#readme",
   "dependencies": {
-    "body-parser": "^2.2.0",
     "express": "^4.21.2",
     "morgan": "^1.10.1",
     "mysql": "^2.18.1",
