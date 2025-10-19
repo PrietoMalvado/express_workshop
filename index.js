@@ -2,6 +2,7 @@ const express = require('express');//importamos express
 const app = express();//creamos una instancia de express
 const morgan = require('morgan');//importamos morgan para ver las peticiones en consola
 const pokemon = require('./routes/pokemon');//importamos las rutas de pokemon
+const user =  require('./routes/user');//importamos las rutas de user
 
 //:::::::::::::::::::::MIDDLEWARES:::::::::::::::::::::
 
@@ -16,6 +17,8 @@ app.get('/', (req, res, next) => {
 });
 
 app.use('/pokemon', pokemon);//definimos la ruta /pokemon para las rutas de pokemon
+
+app.use('/user', user);//definimos la ruta /user para las rutas de user
 
 app.use('/', (req, res, next ) => {
     return res.status(404).json({code: 404, message:'URL no encontrado'});// mensaje de error si la ruta no existe
