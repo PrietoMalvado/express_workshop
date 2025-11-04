@@ -9,7 +9,7 @@ const user =  require('./routes/user');//importamos las rutas de user
 const auth = require('./middleware/auth');//importamos el middleware de autenticacion
 const notFound = require('./middleware/NotFound');//importamos el middleware de ruta no encontrada
 const welcome = require('./middleware/index');//importamos el middleware de bienvenida
-
+const cors = require('./middleware/cors');//importamos el middleware de cors
 //:::::::::::::::::::::CONFIGURACIONES:::::::::::::::::::::
 
 app.use(morgan('dev'));//usamos morgan en modo desarrollo
@@ -17,6 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //:::::::::::::::::::::Inicio del servidor:::::::::::::::::::::
+
+app.use(cors);
 
 app.get(welcome);
 
