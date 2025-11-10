@@ -14,7 +14,7 @@ user.post('/signin', async (req, res, next) => {
         if (rows.affectedRows == 1){ 
             return res.status(201).json({code: 201, message:'Usuario registrado correctamente'})
         }
-        return res.status(500).json({code: 500, message:'Ocurrio un error, usuario no registrado'});
+        return res.status(401).json({code: 401, message:'Ocurrio un error, usuario no registrado'});
     }
     return res.status(500).json({code: 500, message:'Error, campos incompletos'});
 });
@@ -32,10 +32,10 @@ user.post('/login', async (req, res, next) => {
 
             return res.status(200).json({code: 200, message: token});
         }else{
-            return res.status(200).json({code: 200, message: "Usuario o contraseña incorrectos"});
+            return res.status(200).json({code: 401, message: "Usuario o contraseña incorrectos"});
         }
     }
-    return res.status(500).json({code: 500, message:'Error, campos incompletos'});
+    return res.status(200).json({code: 500, message:'Error, campos incompletos'});
 });
 
 //:::::::::::::::::::::METODO GET USER:::::::::::::::::::::
